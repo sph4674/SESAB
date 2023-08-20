@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <script src="https://kit.fontawesome.com/4a3b1f73a2.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="./js/script.js" type="module"></script>
+    <link rel="stylesheet" href="css/style.css" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- <link rel="stylesheet" href="/style.css"> -->
+    <title> E-COMMERCE WEBSITE</title>
+    <!-- favicon -->
+    <link rel="icon" href="https://yt3.ggpht.com/a/AGF-l78km1YyNXmF0r3-0CycCA0HLA_i6zYn_8NZEg=s900-c-k-c0xffffffff-no-rj-mo" type="image/gif" sizes="16x16">
+    <!-- header links -->
+    <script src="https://kit.fontawesome.com/4a3b1f73a2.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+    <!-- slider links -->
+    <!-- <script src="http://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script> -->
+    <script src="js/jQuery3.4.1.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css">
+
+    <title>SESAB</title>
+  </head>
+  <body>
+
+  
+    <div class="allProductsApp">
+      <header class="header">
+        <h2 class="header__title"><a href ="main.html" style="color: Black;">LOGOUT</a></h2>
+        <h1 class="header__title">SESAB</h2>
+        <div class="header__icon">
+          <h5>Cart</h5>
+          🛒 <span class="header__icon--total">0</span>
+        </div>
+      </header>
+
+    </script>
+    <!-- SLIDER -->
+    <div id="2"></div>
+    <script>
+        load("slider.html");
+        function load(url)
+        {
+            req = new XMLHttpRequest();
+            req.open("GET", url, false);
+            req.send(null);
+            document.getElementById(2).innerHTML = req.responseText;
+        }
+    </script>
+      <main class="container">
+        <div class="products"></div>
+      </main>
+    </div>
+
+    <div class="shoppingCartApp">
+      <header class="header">
+        <h2 class="header__title">
+          <a class="btn" href="./index.html">Go back</a>
+        </h2>
+
+        <button id="clearButton" class="btn"><a href="http://localhost:5500/">Place Order</a></button>
+        <!-- <label for="checkBox">
+          <input type="checkbox" id="checkBox">
+          <h6>Confirm order</h6>
+          <button id="clearButton" class="btn" onclick="checkOrder()">Place Order</button>
+        </label>
+        
+        <script>
+          function checkOrder() {
+            var checkBox = document.getElementById("checkBox");
+            if (checkBox.checked) {
+              // Redirect to placed.html when the checkbox is checked
+              window.location.href = "placed.html";
+            } else {
+              // Display an alert or perform other actions when the checkbox is not checked
+              alert("Please check the box to place the order.");
+            }
+          }
+        </script> -->
+
+      </header>
+      <main class="container">
+        <section class="shopping-cart">
+
+          <h2>Total price: <span class="totalPrice">0</span> ₹</h2>
+          <div class="cart-items">
+            <div class="item"></div>
+          </div>      
+
+        </section>
+      </main>
+    </div>
+    <!-- clear cart -->
+
+    
+    
+  <script>
+    const clearButton = document.querySelector('#clearButton');
+    const currentCartItemsContainer = document.querySelector('.item');
+    const totalPrice = document.querySelector('.totalPrice');
+    const cartIconTotal = document.querySelector('.header__icon--total');
+
+    clearButton.addEventListener('click', clearCart);
+
+    // Load cart items from localStorage on page load
+    window.addEventListener('load', () => {
+      const savedCartItems = getLocalStorage('currentCart');
+      const savedTotalPrice = getLocalStorage('totalPrice');
+      const savedCartCount = getLocalStorage('cartCount');
+
+      if (savedCartItems && savedTotalPrice) {
+        displayCartItems(savedCartItems);
+        totalPrice.innerText = savedTotalPrice;
+        cartIconTotal.innerText = savedCartCount;
+      }
+    });
+
+    function clearCart() {
+      currentCartItemsContainer.innerHTML = '';
+      totalPrice.innerText = '0';
+      cartIconTotal.innerText = '0';
+
+      // Clear cart data from localStorage
+      setLocalStorage('currentCart', []);
+      setLocalStorage('totalPrice', '0');
+      setLocalStorage('cartCount', '0');
+    }
+
+    // Helper functions to get and set data in localStorage
+    function getLocalStorage(key) {
+      const data = localStorage.getItem(key);
+      return data ? JSON.parse(data) : null;
+    }
+
+    function setLocalStorage(key, value) {
+      localStorage.setItem(key, JSON.stringify(value));
+    }
+  </script>
+
+
+
+
+     <!-- FOOTER -->
+     <div id="4"></div>
+     <script>
+         load("footer.html");
+         function load(url)
+         {
+             req = new XMLHttpRequest();
+             req.open("GET", url, false);
+             req.send(null);
+             document.getElementById(4).innerHTML = req.responseText;
+         }
+     </script>
+ 
+ </body>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
+ <script>
+     $(document).ready(function()
+     {
+     $('#containerSlider').slick({
+         dots: true,
+         infinite: true,
+         slidesToShow: 1,
+         slidesToScroll: 1,
+         autoplay: true,
+         autoplaySpeed: 1500,
+         });
+     });
+ </script>
+  </body>
+
+
+  <!-- slider JS START -->
+
+</html>

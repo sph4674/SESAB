@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Registration and Login</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400" rel="stylesheet">
+  <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+  <div class="container">
+    <h2>REGISTRATION</h2>
+    <form id="registrationForm">
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="email" required>
+      </div>
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+      </div>
+      <div class="form-group">
+        <label for="confirmPassword">Confirm Password:</label>
+        <input type="password" id="confirmPassword" name="confirmPassword" required>
+      </div>
+      <div class="form-group">
+        <button type="submit", id="register">Register</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="container">
+    <h2>LOGIN</h2>
+    <form id="loginForm">
+      <div class="form-group">
+        <label for="loginemail">Email:</label>
+        <input type="text" id="loginemail" name="loginemail" required>
+      </div>
+      <div class="form-group">
+        <label for="loginPassword">Password:</label>
+        <input type="password" id="loginPassword" name="loginPassword" required>
+      </div>
+      <div class="form-group">
+        <button type="submit", id="login">Login</button>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById("registrationForm").addEventListener("submit", function(event) {
+      event.preventDefault(); // Prevent form submission
+      var email = document.getElementById("email").value;
+      var password = document.getElementById("password").value;
+      var confirmPassword = document.getElementById("confirmPassword").value;
+
+      // Perform any client-side validation if needed
+
+      if (password !== confirmPassword) {
+        alert("Passwords do not match.");
+        return;
+      }
+      else{
+        window.location.href = 'index.html';
+      }
+
+      // Send the registration data to the server for processing
+      // Implement your backend logic here to handle the registration
+
+      alert("Registration successful!");
+      // Optionally, redirect to a login page
+      // window.location.href = "login.html";
+    });
+
+    document.getElementById("loginForm").addEventListener("submit", function(event) {
+      event.preventDefault(); // Prevent form submission
+      var loginemail = document.getElementById("loginemail").value;
+      var loginPassword = document.getElementById("loginPassword").value;
+
+      // Perform any client-side validation if needed
+
+      // Send the login data to the server for processing
+      // Implement your backend logic here to handle the login
+
+    //  alert("Login successful!");
+    //  Optionally, redirect to a different page
+      // window.location.href = "index.html";
+    });
+  </script>
+</body>
+
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-analytics.js";
+  import {getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyArV5jhrEQpCke32VnoVXXDMKoiABw_1aw",
+    authDomain: "sesab-d398c.firebaseapp.com",
+    projectId: "sesab-d398c",
+    storageBucket: "sesab-d398c.appspot.com",
+    messagingSenderId: "284142735966",
+    appId: "1:284142735966:web:ebda27283a7bf46e869acf",
+    measurementId: "G-EJKC1W8GCG"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  const auth = getAuth();  
+
+  console.log(app);
+
+   //----- New Registration code start	  
+	  document.getElementById("register").addEventListener("click", function() {
+		  var email =  document.getElementById("email").value;
+		  var password = document.getElementById("password").value;
+		  //For new registration
+		  createUserWithEmailAndPassword(auth, email, password)
+		  .then((userCredential) => {
+		    // Signed in 
+		    const user = userCredential.user;
+		    console.log(user);
+		    alert("Registration successfully!!");
+		    // ...
+		  })
+		  .catch((error) => {
+		    const errorCode = error.code;
+		    const errorMessage = error.message;
+		    // ..
+		    console.log(errorMessage);
+		    alert(error);
+		  });		  		  
+	  });
+	  //----- End
+
+	  //----- Login code start	  
+	  document.getElementById("login").addEventListener("click", function() {
+		  var email =  document.getElementById("loginemail").value;
+		  var password = document.getElementById("loginPassword").value;
+
+		  signInWithEmailAndPassword(auth, email, password)
+		  .then((userCredential) => {
+		    // Signed in 
+		    const user = userCredential.user;
+		    console.log(user);
+		    alert(user.email+" Login successfully!!!");
+         window.location.href = "index.html";
+
+		    // document.getElementById('logout').style.display = 'block';
+		    // ...
+		  })
+		  .catch((error) => {
+		    const errorCode = error.code;
+		    const errorMessage = error.message;
+		    console.log(errorMessage);
+		    alert(errorMessage);
+		  });		  		  
+	  });
+	  //----- End
+
+	  //----- Logout code start	  
+	//   document.getElementById("logout").addEventListener("click", function() {
+	// 	  signOut(auth).then(() => {
+	// 		  // Sign-out successful.
+	// 		  console.log('Sign-out successful.');
+	// 		  alert('Sign-out successful.');
+	// 		  document.getElementById('logout').style.display = 'none';
+	// 		}).catch((error) => {
+	// 		  // An error happened.
+	// 		  console.log('An error happened.');
+	// 		});		  		  
+	//   });
+	  //----- End
+
+</script>
+
+
+</html>

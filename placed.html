@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Order Placed Receipt</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      background-color: #f8f9fa;
+      font-family: 'Lato', sans-serif;
+    }
+    .receipt {
+      margin: 20px auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      background-color: #fff;
+      max-width: 500px;
+      font-family: Arial, sans-serif;
+    }
+    h1 {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+    p {
+      margin: 10px 0;
+    }
+    .date-time {
+      font-size: 18px;
+      font-weight: bold;
+    }
+  </style>
+  <script>
+    function updateDateTime() {
+      var currentDateTime = new Date();
+      var dateElement = document.getElementById("date");
+      var timeElement = document.getElementById("time");
+      var dayElement = document.getElementById("day");
+
+      // Update the date element
+      var options = { year: 'numeric', month: 'long', day: 'numeric' };
+      dateElement.textContent = currentDateTime.toLocaleDateString(undefined, options);
+
+      // Update the time element
+      var timeOptions = { hour: '2-digit', minute: '2-digit' };
+      timeElement.textContent = currentDateTime.toLocaleTimeString(undefined, timeOptions);
+
+      // Update the day element
+      var daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+      var dayOfWeek = currentDateTime.getDay();
+      dayElement.textContent = daysOfWeek[dayOfWeek];
+    }
+
+    // Call the updateDateTime function once when the page loads
+    window.onload = updateDateTime;
+  </script>
+</head>
+<body>
+  <div class="container">
+    <div class="receipt">
+      <p><strong>Order Details:</strong></p>
+      <p><h1>SESAB</h1></p>
+      <main>
+        <section class="order-details">
+          <h2>Thank You for Your Order!</h2>
+          <p>Your order has been successfully placed.</p>
+        </section>
+    
+        <p class="success-message">Payment was processed successfully.</p>
+        
+      </main>
+      <p class="date-time">Date: <span id="date"></span></p>
+      <p class="date-time">Time: <span id="time"></span></p>
+      <p class="date-time">Day: <span id="day"></span></p>
+    </div>
+  </div>
+   <!-- FOOTER -->
+   <div id="4"></div>
+   <script>
+       load("footer.html");
+       function load(url)
+       {
+           req = new XMLHttpRequest();
+           req.open("GET", url, false);
+           req.send(null);
+           document.getElementById(4).innerHTML = req.responseText;
+       }
+   </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
